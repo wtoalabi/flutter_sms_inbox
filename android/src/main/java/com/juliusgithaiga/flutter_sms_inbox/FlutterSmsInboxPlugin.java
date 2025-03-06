@@ -13,11 +13,11 @@ import io.flutter.plugin.common.MethodChannel.Result;
 /** FlutterSmsInboxPlugin */
 public class FlutterSmsInboxPlugin implements FlutterPlugin, MethodCallHandler {
   private static final String CHANNEL_QUERY = "plugins.juliusgithaiga.com/querySMS";
-
   private MethodChannel methodChannel;
   private MethodChannel querySmsChannel;
 
   /** Plugin registration. */
+  // This method is kept for compatibility with older Flutter versions
   @SuppressWarnings("deprecation")
   public static void registerWith(io.flutter.plugin.common.PluginRegistry.Registrar registrar) {
     final FlutterSmsInboxPlugin instance = new FlutterSmsInboxPlugin();
@@ -25,20 +25,19 @@ public class FlutterSmsInboxPlugin implements FlutterPlugin, MethodCallHandler {
   }
 
   @Override
-  public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
+  public void onAttachedToEngine(@NonNull FlutterPlugin.FlutterPluginBinding binding) {
     onAttachedToEngine(binding.getApplicationContext(), binding.getBinaryMessenger());
   }
 
   private void onAttachedToEngine(Context appContext, BinaryMessenger messenger) {
     methodChannel = new MethodChannel(messenger, "flutter_sms_inbox");
     methodChannel.setMethodCallHandler(this);
-
     querySmsChannel = new MethodChannel(messenger, CHANNEL_QUERY, JSONMethodCodec.INSTANCE);
     querySmsChannel.setMethodCallHandler(new SmsQuery(appContext));
   }
 
   @Override
-  public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+  public void onDetachedFromEngine(@NonNull FlutterPlugin.FlutterPluginBinding binding) {
     methodChannel.setMethodCallHandler(null);
     querySmsChannel.setMethodCallHandler(null);
     methodChannel = querySmsChannel = null;
