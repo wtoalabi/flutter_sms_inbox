@@ -2,7 +2,6 @@ package com.juliusgithaiga.flutter_sms_inbox;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
-
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.JSONMethodCodec;
@@ -10,7 +9,6 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry;
 
 /** FlutterSmsInboxPlugin */
 public class FlutterSmsInboxPlugin implements FlutterPlugin, MethodCallHandler {
@@ -18,13 +16,12 @@ public class FlutterSmsInboxPlugin implements FlutterPlugin, MethodCallHandler {
   private MethodChannel methodChannel;
   private MethodChannel querySmsChannel;
 
-  /** Plugin registration. */
-  // This method is kept for compatibility with older Flutter versions
-  @SuppressWarnings("deprecation")
-  public static void registerWith(PluginRegistry.Registrar registrar) {
-    final FlutterSmsInboxPlugin instance = new FlutterSmsInboxPlugin();
-    instance.onAttachedToEngine(registrar.context(), registrar.messenger());
-  }
+  /** Plugin registration for older Flutter versions. 
+   * Note: This method is removed as the Registrar class is deprecated
+   * and not available in newer Flutter versions.
+   * The plugin now uses the recommended FlutterPlugin interface methods below.
+   */
+  // Legacy registration code removed to fix compilation error
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPlugin.FlutterPluginBinding binding) {
