@@ -2,7 +2,6 @@ package com.juliusgithaiga.flutter_sms_inbox;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
-
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.JSONMethodCodec;
@@ -18,8 +17,12 @@ public class FlutterSmsInboxPlugin implements FlutterPlugin, MethodCallHandler {
   private MethodChannel querySmsChannel;
 
   /** Plugin registration. */
-  // Remove the problematic method entirely since it's not compatible
-  // with your Flutter version
+  // This method is kept for compatibility with older Flutter versions
+  @SuppressWarnings("deprecation")
+  public static void registerWith(io.flutter.plugin.common.PluginRegistry.Registrar registrar) {
+    final FlutterSmsInboxPlugin instance = new FlutterSmsInboxPlugin();
+    instance.onAttachedToEngine(registrar.context(), registrar.messenger());
+  }
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPlugin.FlutterPluginBinding binding) {
