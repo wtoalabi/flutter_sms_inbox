@@ -10,7 +10,6 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry;
 
 /** FlutterSmsInboxPlugin */
 public class FlutterSmsInboxPlugin implements FlutterPlugin, MethodCallHandler {
@@ -19,12 +18,8 @@ public class FlutterSmsInboxPlugin implements FlutterPlugin, MethodCallHandler {
   private MethodChannel querySmsChannel;
 
   /** Plugin registration. */
-  // This method is kept for compatibility with older Flutter versions
-  @SuppressWarnings("deprecation")
-  public static void registerWith(PluginRegistry.Registrar registrar) {
-    final FlutterSmsInboxPlugin instance = new FlutterSmsInboxPlugin();
-    instance.onAttachedToEngine(registrar.context(), registrar.messenger());
-  }
+  // Remove the problematic method entirely since it's not compatible
+  // with your Flutter version
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPlugin.FlutterPluginBinding binding) {
